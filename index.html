@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Etch-a-Sketch</title>
+    </head>
+    <body>
+
+        <div id='container'></div>
+
+        <script>
+
+        const container = document.querySelector('#container');
+        container.style.cssText = 'width: 640px; height: 640px; display: flex; flex-wrap: wrap';
+
+        function changeColor(e) {
+            e.target.style.background = 'black';
+        }
+
+        function reverseColor(e) {
+            e.target.style.background = 'white';
+        }
+
+        for (let i = 0; i < 256; i++) {
+            const square = document.createElement('div');
+            square.id = 'square' + i;
+            square.className = 'square';
+            square.style.cssText = 'flex-basis: 6.25%; flex-grow: 1';
+            
+            square.addEventListener('mouseover', changeColor);
+            // square.addEventListener('mouseout', reverseColor);
+
+            container.appendChild(square);
+        }
+
+        </script>
+
+    </body>
+</html>
