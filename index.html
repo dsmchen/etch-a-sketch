@@ -5,6 +5,10 @@
     </head>
     <body>
 
+        <div id='header'>
+            <button id='button'>Clear grid and set number of squares per side</button>
+        </div>
+        
         <div id='container'></div>
 
         <script>
@@ -12,24 +16,45 @@
         const container = document.querySelector('#container');
         container.style.cssText = 'width: 640px; height: 640px; display: flex; flex-wrap: wrap';
 
-        function changeColor(e) {
-            e.target.style.background = 'black';
-        }
-
-        function reverseColor(e) {
-            e.target.style.background = 'white';
-        }
-
         for (let i = 0; i < 256; i++) {
             const square = document.createElement('div');
             square.id = 'square' + i;
             square.className = 'square';
-            square.style.cssText = 'flex-basis: 6.25%; flex-grow: 1';
-            
+            square.style.cssText = 'background-color: black; flex-basis: 6.25%; flex-grow: 1';
             square.addEventListener('mouseover', changeColor);
-            // square.addEventListener('mouseout', reverseColor);
 
             container.appendChild(square);
+        }
+
+        function changeColor(e) {
+            e.target.style.background = 'white';
+        }
+
+        const button = document.querySelector('#button');
+        button.addEventListener('click', clearGridSetSquare);
+
+        function clearGridSetSquare() {
+            const string = prompt('Enter a positive integer');
+            const number = Number(string);
+            if (number > 0 && Number.isInteger(number) === true) {
+
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+
+                for (let i = 0; i < (number * number); i++) {
+                    const square = document.createElement('div');
+                    square.id = 'square' + i;
+                    square.className = 'square';
+                    square.style.cssText = `background-color: black; flex-basis: ${(1 / number) * 100}%; flex-grow: 1`;
+                    square.addEventListener('mouseover', changeColor);
+
+                    container.appendChild(square);
+                }
+
+            } else {
+                alert('That is not a positive integer')
+            }
         }
 
         </script>
