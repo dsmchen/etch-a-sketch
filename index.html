@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Etch-a-Sketch</title>
+        <link href='./style.css' type='text/css' rel='stylesheet'>
     </head>
     <body>
 
@@ -14,47 +15,32 @@
         <script>
 
         const container = document.querySelector('#container');
-        container.style.cssText = 'width: 640px; height: 640px; display: flex; flex-wrap: wrap';
-
-        for (let i = 0; i < 256; i++) {
-            const square = document.createElement('div');
-            square.id = 'square' + i;
-            square.className = 'square';
-            square.style.cssText = 'background-color: black; flex-basis: 6.25%; flex-grow: 1';
-            square.addEventListener('mouseover', changeColor);
-
-            container.appendChild(square);
-        }
-
-        function changeColor(e) {
-            e.target.style.background = 'white';
-        }
+        container.classList.add('container');
 
         const button = document.querySelector('#button');
-        button.addEventListener('click', clearGridSetSquare);
+        button.addEventListener('click', createGrid);
 
-        function clearGridSetSquare() {
+        function createGrid(input) {
             const string = prompt('Enter a positive integer');
-            const number = Number(string);
-            if (number > 0 && Number.isInteger(number) === true) {
-
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-
-                for (let i = 0; i < (number * number); i++) {
+            const input = Number(string);
+            if (Number.isInteger(input) && input > 0) {
+                container.innerHTML = '';
+                for (let i = 0; i < (input * input); i++) {
                     const square = document.createElement('div');
                     square.id = 'square' + i;
                     square.className = 'square';
                     square.style.cssText = `background-color: black; flex-basis: ${(1 / number) * 100}%; flex-grow: 1`;
                     square.addEventListener('mouseover', changeColor);
-
                     container.appendChild(square);
                 }
-
             } else {
                 alert('That is not a positive integer')
             }
+        }
+        window.onload = createGrid(16);
+
+        function changeColor(e) {
+            e.target.style.background = 'white';
         }
 
         </script>
