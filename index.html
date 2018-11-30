@@ -21,20 +21,19 @@
         button.addEventListener('click', createGrid);
 
         function createGrid(input) {
-            const string = prompt('Enter a positive integer');
-            const input = Number(string);
             if (Number.isInteger(input) && input > 0) {
-                container.innerHTML = '';
                 for (let i = 0; i < (input * input); i++) {
                     const square = document.createElement('div');
                     square.id = 'square' + i;
                     square.className = 'square';
-                    square.style.cssText = `background-color: black; flex-basis: ${(1 / number) * 100}%; flex-grow: 1`;
+                    square.style.cssText = `background-color: black; flex-basis: ${(1 / input) * 100}%; flex-grow: 1`;
                     square.addEventListener('mouseover', changeColor);
                     container.appendChild(square);
                 }
             } else {
-                alert('That is not a positive integer')
+                container.innerHTML = '';
+                const string = prompt('Enter a positive integer');
+                createGrid(Number(string));
             }
         }
         window.onload = createGrid(16);
