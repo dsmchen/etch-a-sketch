@@ -1,6 +1,11 @@
-.container {
+#container {
     width: 640px;
     height: 640px;
     display: flex;
     flex-wrap: wrap;
+}
+
+.square {
+    background-color: black;
+    flex-grow: 1;
 }

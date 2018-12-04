@@ -15,7 +15,6 @@
         <script>
 
         const container = document.querySelector('#container');
-        container.classList.add('container');
 
         const button = document.querySelector('#button');
         button.addEventListener('click', createGrid);
@@ -24,9 +23,8 @@
             if (Number.isInteger(input) && input > 0) {
                 for (let i = 0; i < (input * input); i++) {
                     const square = document.createElement('div');
-                    square.id = 'square' + i;
                     square.className = 'square';
-                    square.style.cssText = `background-color: black; flex-basis: ${(1 / input) * 100}%; flex-grow: 1`;
+                    square.style.flexBasis = `${(1 / input) * 100}%`;
                     square.addEventListener('mouseover', changeColor);
                     container.appendChild(square);
                 }
